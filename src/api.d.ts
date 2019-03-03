@@ -1,2 +1,2 @@
-// the api/kanka library doesn't suppor types yet
+// the api/kanka library doesn't support types yet
 declare module "*";

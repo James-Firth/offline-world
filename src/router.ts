@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
+import NotFound from './views/NotFound.vue';
 
 Vue.use(Router);
 
@@ -14,6 +15,21 @@ export default new Router({
       component: Home,
     },
     {
+      path: '/campaigns',
+      name: 'campaigns',
+      component: () => import(/* webpackChunkName: "campaigns" */ './views/Campaigns.vue'),
+    },
+    {
+      path: '/characters',
+      name: 'characters',
+      component: () => import(/* webpackChunkName: "characters" */ './views/Characters.vue'),
+    },
+    {
+      path: '/characters/:id',
+      name: 'character',
+      component: () => import(/* webpackChunkName: "characters" */ './views/Character.vue'),
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting
@@ -21,5 +37,10 @@ export default new Router({
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
     },
+    {
+      // will match everything
+      path: '*',
+      component: NotFound,
+    }
   ],
 });

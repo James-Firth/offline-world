@@ -5,12 +5,12 @@ const state = {
 };
 
 const getters = {
-    character: (state) => (id: number) => {
+    character: (state: any) => (id: number) => {
         if (state.allCharacters.length < 1) return null;
         const results =  state.allCharacters.filter((char: any) => char.id === id);
         return (results.length === 1) ? results[0] : null;
     },
-    active: (state, getters) => {
+    active: (state: any, getters: any) => {
         return getters.character(state.activeCharacterId);
     },
 }
@@ -20,16 +20,16 @@ const mutations = {
         chars.sort((a: any, b: any) => a.name > b.name);
         state.allCharacters = chars;
     },
-    setIsLoading(state, val) {
+    setIsLoading(state: any, val: boolean) {
         state.isLoading = val;
     },
-    setActive(state, id) {
+    setActive(state: any, id: number) {
         state.activeCharacterId = id;
     }
 };
 
 const actions = {
-    async fetchAll({ state, commit, rootGetters }) {
+    async fetchAll({ commit, rootGetters}: { commit: any, rootGetters: any}) {
         const camp = rootGetters.getActiveCampaign;
         if (!camp) return;
         

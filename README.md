@@ -1,4 +1,5 @@
 # offline-world
+[![Netlify Status](https://api.netlify.com/api/v1/badges/43dec053-930e-4043-a5c4-5071ebe1ac6d/deploy-status)](https://app.netlify.com/sites/angry-wescoff-21ff62/deploys)
 
 ## Project setup
 ```

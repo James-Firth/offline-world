@@ -101,7 +101,7 @@ export default {
   computed: {
     drawer: {
       get() { return this.$store.state.navDrawerOpen; },
-      set(val) { console.log(val); this.setNavDrawerOpen(val); },
+      set(val) { this.setNavDrawerOpen(val); },
     },
     activeCampaign() {
       return this.$store.getters.getCampaign(this.activeCampaignId);
@@ -124,14 +124,20 @@ export default {
     }
   },
   mounted() {
-    console.log( process.env.VUE_APP_KANKA_API);
-    this.$store.dispatch('setupApi', process.env.VUE_APP_KANKA_API)
-    .then(() => this.$store.dispatch('campaigns'))
-    .then(() => {
+    if(process.env.VUE_APP_KANKA_API) {
+      this.$store.dispatch('setupApi', process.env.VUE_APP_KANKA_API)
+      .then(() => this.$store.dispatch('campaigns'))
+      .then(() => {
+        if (!this.activeCampaignId) {
+          this.$router.push('/campaigns')
+        }
+      })
+    }
+    else  {
       if (!this.activeCampaignId) {
         this.$router.push('/campaigns')
       }
-    })
+    }
   }
 }
 </script>

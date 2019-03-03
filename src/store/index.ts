@@ -47,8 +47,8 @@ export default new Vuex.Store({
   },
   actions: {
     setupApi({ commit }, token) {
+      kanka.setToken(token);
       commit('setApiToken', token);
-      kanka.setToken(process.env.VUE_APP_KANKA_API);
     },
     async campaigns({ commit }) {
       commit('setIsLoading', true);

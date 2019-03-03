@@ -20,7 +20,7 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" :dark="darkTheme" @click.native="setApiToken(accessToken)">Authenticate</v-btn>
+                <v-btn color="primary" :dark="darkTheme" @click.native="setupApi(accessToken)">Authenticate</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { mapMutations, mapState } from 'vuex';
+import { mapMutations, mapState, mapActions } from 'vuex';
   export default {
     name: 'Authenticate',
     data: () => ({
@@ -42,7 +42,7 @@ import { mapMutations, mapState } from 'vuex';
         ...mapState(['darkTheme']),
     },
     methods: {
-        ...mapMutations(['setApiToken'])
+        ...mapActions(['setupApi'])
     }
   }
 </script>

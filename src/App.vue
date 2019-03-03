@@ -115,23 +115,32 @@ export default {
   watch: {
     activeCampaign(newCamp, oldCamp) {
       this.currentCampaign = newCamp;
+    },
+    apiToken(newToken) {
+      if (newToken) {
+        this.fetchCampaigns()
+      }
     }
   },
   methods: {
     ...mapMutations(['setDarkTheme', 'setNavDrawerOpen']),
     setActiveCampaign(id) {
       this.$store.commit('setActiveCampaign', id);
-    }
-  },
-  mounted() {
-    if(process.env.VUE_APP_KANKA_API) {
-      this.$store.dispatch('setupApi', process.env.VUE_APP_KANKA_API)
-      .then(() => this.$store.dispatch('campaigns'))
+    },
+    fetchCampaigns() {
+      this.$store.dispatch('campaigns')
       .then(() => {
         if (!this.activeCampaignId) {
           this.$router.push('/campaigns')
         }
       })
+    }
+  },
+  mounted() {
+    if(process.env.VUE_APP_KANKA_API) {
+      this.$store.dispatch('setupApi', process.env.VUE_APP_KANKA_API)
+      .then(() => this.fetchCampaigns());
+      
     }
     else  {
       if (!this.activeCampaignId) {
